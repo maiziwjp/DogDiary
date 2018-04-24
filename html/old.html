@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <script>!function(a,b){function c(){var b=f.getBoundingClientRect().width;b/i>540&&(b=540*i);var c=b/10;f.style.fontSize=c+"px",k.rem=a.rem=c}var d,e=a.document,f=e.documentElement,g=e.querySelector('meta[name="viewport"]'),h=e.querySelector('meta[name="flexible"]'),i=0,j=0,k=b.flexible||(b.flexible={});if(g){console.warn("将根据已有的meta标签来设置缩放比例");var l=g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);l&&(j=parseFloat(l[1]),i=parseInt(1/j))}else if(h){var m=h.getAttribute("content");if(m){var n=m.match(/initial\-dpr=([\d\.]+)/),o=m.match(/maximum\-dpr=([\d\.]+)/);n&&(i=parseFloat(n[1]),j=parseFloat((1/i).toFixed(2))),o&&(i=parseFloat(o[1]),j=parseFloat((1/i).toFixed(2)))}}if(!i&&!j){var p=(a.navigator.appVersion.match(/android/gi),a.navigator.appVersion.match(/iphone/gi)),q=a.devicePixelRatio;i=p?q>=3&&(!i||i>=3)?3:q>=2&&(!i||i>=2)?2:1:1,j=1/i}if(f.setAttribute("data-dpr",i),!g)if(g=e.createElement("meta"),g.setAttribute("name","viewport"),g.setAttribute("content","initial-scale="+j+", maximum-scale="+j+", minimum-scale="+j+", user-scalable=no"),f.firstElementChild)f.firstElementChild.appendChild(g);else{var r=e.createElement("div");r.appendChild(g),e.write(r.innerHTML)}a.addEventListener("resize",function(){clearTimeout(d),d=setTimeout(c,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(d),d=setTimeout(c,300))},!1),"complete"===e.readyState?e.body.style.fontSize=12*i+"px":e.addEventListener("DOMContentLoaded",function(){e.body.style.fontSize=12*i+"px"},!1),c(),k.dpr=a.dpr=i,k.refreshRem=c,k.rem2px=function(a){var b=parseFloat(a)*this.rem;return"string"==typeof a&&a.match(/rem$/)&&(b+="px"),b},k.px2rem=function(a){var b=parseFloat(a)/this.rem;return"string"==typeof a&&a.match(/px$/)&&(b+="rem"),b}}(window,window.lib||(window.lib={}));</script>
+    <title></title>
+    <link rel="stylesheet" href="../css/api.css">
+    <style>
+    	body{
+    		width: 100%;
+    		height: 100%;
+    	}
+    	#header{  width:10.0rem; height: 40px; background: #dff3f8; text-align: center; line-height: 40px; font-size: 18px; font-weight: bolder; margin-top: 20px; }
+    	#edit{ width: 60px; height: 40px; line-height:40px; color:#2c7cf6; float: left; text-align: left; margin-left: 0.4rem;}
+    	#note{ width:6.8rem; height: 40px; line-height: 40px; text-align: center; float: left; position:relative;}
+    	#edit img{ height: 24px; margin-top: 8px;}
+    	#edit span{ height: 40px; position:absolute;top:22px;left: 34px;}
+    	#content{ width:10.0rem; height: 600px; position: fixed;}
+    	#time{ width:10.0rem; height: 40px; border:1px solid #ececeb; background: #dff3f8;font-size:18px; text-align:center; line-height: 50px;}
+    	#title,#select{ height: 50px; line-height: 50px; width:9.0rem; margin-left:0.5rem; text-align:left; color:#000; font-size: 18px; border-bottom:1px solid #ececeb;}
+    	#diary{ height: 300px;  width:9.0rem; margin-left:0.5rem;  color:#000; font-size:16px; margin-top: 10px;}
+    	#diary textarea{ height: 300px; width:9.0rem; line-height: 30px; outline: none; border:1px solid #ececeb; border-radius: 6px;}
+    	input { outline: none;}
+    	
+    	#select{}
+    	#emotion,#weather,#pic{ width:3.0rem; height: 60px; float: left; text-align: center; line-height: 60px;}
+    	#emotion img,#weather img,#pic img{ height: 40px; margin-top: 6px;}
+   
+   		#wrap{width:10.0rem; height: 800px; background: #000; opacity:0.5; z-index: 1; position:absolute;left: 0;top: 0; display:none;}
+   		#se{ width:9.0rem; margin-left: 0.5rem; border-radius:6px; background: #fff; z-index: 2;position:absolute;left: 0;top: 200px; display:none;}
+   		.pic{ height: 40px; float: left; margin: 8px;}
+   		.pic img{ height: 40px;}
+   		#save{ width:9.0rem; height: 40px; background: #1C00FF; margin-left: 0.5rem; margin-top: 10px;}
+   		#save input{width:9.0rem; height: 40px; border: none;  background: #1C00FF; text-align:center; line-height: 40px; color: #fff; font-size:18px;}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<div id="edit"><img src="../image/back.gif"/> <span>Note</span></div>
+		<div id="note">条目详情</div>
+	</div>
+	<div id="content">
+		<div id="time">2018-4-19 10:20:21</div>
+		<div id="select">
+			<div id="emotion"><img src="../image/happy.png"/></div>
+			<div id="weather"><img src="../image/sunny.png"/></div>
+			<div id="pic"><img src="../image/fj4.jpg"/></div>
+		</div>
+		<div id="title"><input type="text" placeholder="标题" /></div>
+		<div id="diary"><textarea></textarea></div>
+		<div id="save"><input type="button" value="保存" /></div>
+	</div>
+	<div id="wrap"></div>
+	<div id="se">
+		
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript">
+	
+	apiready = function(){
+		//alert(api.pageParam.name);
+		
+		var read=JSON.parse(localStorage.getItem('key'));
+		var theOld = read[api.pageParam.name];
+		//alert(theOld);
+		var edit = document.getElementById("edit");
+		var emotion = document.getElementById("emotion");
+		var weather = document.getElementById("weather");
+		var pic = document.getElementById("pic");
+		var se = document.getElementById("se");
+		var wrap = document.getElementById("wrap");
+		var timeNew = document.getElementById("time");
+		var save = document.getElementById("save");
+		var title = document.getElementById("title").getElementsByTagName("input")[0];//标题
+		var diary = document.getElementById("diary").getElementsByTagName("textarea")[0];//标题
+		
+		var emIndex = theOld.emIndex;//表情记录
+		var weIndex = theOld.weIndex;//天气记录
+		var piIndex = theOld.piIndex;//图片记录
+		var eImg = emotion.getElementsByTagName("img")[0];
+		eImg.src = fj1[emIndex];
+		var wImg = weather.getElementsByTagName("img")[0];
+		wImg.src = fj2[emIndex];
+		var pImg = pic.getElementsByTagName("img")[0];
+		pImg.src = fj[piIndex];
+		title.value = theOld.title;
+		diary.value = theOld.diary;
+		var time = new Date();//fullTime时间记录
+		var fullTime =time.getFullYear()+":"+(time.getMonth()+1)+":"+time.getDate()+"   "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds();
+		timeNew.innerHTML = fullTime;
+		edit.onclick = function(){
+			api.closeFrame();
+		};
+		save.onclick = function(){
+			//alert(title.value);
+			var read=JSON.parse(localStorage.getItem('key'));
+			read.splice(api.pageParam.name,1);
+			localStorage.setItem('key',JSON.stringify(read));
+			var newNote ={};
+			newNote.img = piIndex;
+			newNote.emIndex = emIndex;
+			newNote.weIndex = weIndex;
+			newNote.piIndex = piIndex;
+			newNote.data = fullTime;
+			newNote.title = title.value||"标题";
+			newNote.diary = diary.value;
+			
+			//alert(itemData.length);
+			var read=JSON.parse(localStorage.getItem('key'));
+			read.push(newNote);
+			localStorage.setItem('key',JSON.stringify(read));
+			api.sendEvent({
+    		name: 'myEvent',
+    		extra: {
+        		key1: 'value1',
+        		key2: 'value2'
+    			}
+			});
+			
+		};
+		emotion.onclick = function(){
+			var seCon="";
+			for(var i=0;i<fj1.length;i++)
+			{
+				seCon+='<div class="pic"><img src="'+fj1[i]+'"/></div>';
+			}
+			wrap.style.display="block";
+			se.style.display="block";
+			se.innerHTML = seCon;
+			var selPic = document.getElementsByClassName("pic");
+			for(var i=0;i<selPic.length;i++)
+			{
+				selPic[i].index = i;
+			}
+			for(var i=0;i<selPic.length;i++)
+			{
+				selPic[i].onclick = function(){
+					emIndex = this.index;
+					emotion.getElementsByTagName("img")[0].src = fj1[emIndex];
+					wrap.style.display="none";
+					se.style.display="none";
+				};
+			}
+		};
+		weather.onclick = function(){
+			var seCon="";
+			for(var i=0;i<fj2.length;i++)
+			{
+				seCon+='<div class="pic"><img src="'+fj2[i]+'"/></div>';
+			}
+			wrap.style.display="block";
+			se.style.display="block";
+			se.innerHTML = seCon;
+			var selPic = document.getElementsByClassName("pic");
+			for(var i=0;i<selPic.length;i++)
+			{
+				selPic[i].index = i;
+			}
+			for(var i=0;i<selPic.length;i++)
+			{
+				selPic[i].onclick = function(){
+					weIndex = this.index;
+					weather.getElementsByTagName("img")[0].src = fj2[weIndex];
+					wrap.style.display="none";
+					se.style.display="none";
+				};
+			}
+		};
+		pic.onclick = function(){
+			var seCon="";
+			for(var i=0;i<fj.length;i++)
+			{
+				seCon+='<div class="pic"><img src="'+fj[i]+'"/></div>';
+			}
+			wrap.style.display="block";
+			se.style.display="block";
+			se.innerHTML = seCon;
+			var selPic = document.getElementsByClassName("pic");
+			for(var i=0;i<selPic.length;i++)
+			{
+				selPic[i].index = i;
+			}
+			for(var i=0;i<selPic.length;i++)
+			{
+				selPic[i].onclick = function(){
+					piIndex = this.index;
+					pic.getElementsByTagName("img")[0].src = fj[piIndex];
+					wrap.style.display="none";
+					se.style.display="none";
+				};
+			}
+		};
+		
+	};
+</script>
+</html>

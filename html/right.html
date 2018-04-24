@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <script>!function(a,b){function c(){var b=f.getBoundingClientRect().width;b/i>540&&(b=540*i);var c=b/10;f.style.fontSize=c+"px",k.rem=a.rem=c}var d,e=a.document,f=e.documentElement,g=e.querySelector('meta[name="viewport"]'),h=e.querySelector('meta[name="flexible"]'),i=0,j=0,k=b.flexible||(b.flexible={});if(g){console.warn("将根据已有的meta标签来设置缩放比例");var l=g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);l&&(j=parseFloat(l[1]),i=parseInt(1/j))}else if(h){var m=h.getAttribute("content");if(m){var n=m.match(/initial\-dpr=([\d\.]+)/),o=m.match(/maximum\-dpr=([\d\.]+)/);n&&(i=parseFloat(n[1]),j=parseFloat((1/i).toFixed(2))),o&&(i=parseFloat(o[1]),j=parseFloat((1/i).toFixed(2)))}}if(!i&&!j){var p=(a.navigator.appVersion.match(/android/gi),a.navigator.appVersion.match(/iphone/gi)),q=a.devicePixelRatio;i=p?q>=3&&(!i||i>=3)?3:q>=2&&(!i||i>=2)?2:1:1,j=1/i}if(f.setAttribute("data-dpr",i),!g)if(g=e.createElement("meta"),g.setAttribute("name","viewport"),g.setAttribute("content","initial-scale="+j+", maximum-scale="+j+", minimum-scale="+j+", user-scalable=no"),f.firstElementChild)f.firstElementChild.appendChild(g);else{var r=e.createElement("div");r.appendChild(g),e.write(r.innerHTML)}a.addEventListener("resize",function(){clearTimeout(d),d=setTimeout(c,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(d),d=setTimeout(c,300))},!1),"complete"===e.readyState?e.body.style.fontSize=12*i+"px":e.addEventListener("DOMContentLoaded",function(){e.body.style.fontSize=12*i+"px"},!1),c(),k.dpr=a.dpr=i,k.refreshRem=c,k.rem2px=function(a){var b=parseFloat(a)*this.rem;return"string"==typeof a&&a.match(/rem$/)&&(b+="px"),b},k.px2rem=function(a){var b=parseFloat(a)/this.rem;return"string"==typeof a&&a.match(/px$/)&&(b+="rem"),b}}(window,window.lib||(window.lib={}));</script>
+    <title></title>
+    <link rel="stylesheet" href="../css/api.css">
+    <style>
+    	body{
+    		width: 100%;
+    		height: 100%;
+    	}
+    	#header{  width:10.0rem; height: 40px; background: #dff3f8; text-align: center; line-height: 40px; font-size: 18px; font-weight: bolder; margin-top: 20px; }
+    	#edit,#add{ width: 1.6rem; height: 40px; text-align:center; line-height:40px; color:#2c7cf6; float: left;}
+    	#note{ width:6.8rem; height: 40px; line-height: 40px; text-align: center; float: left;}
+    	#add{ font-size: 30px; font-weight: normal;}
+    	
+    	#content{ width:10.0rem; background:url(../image/bgd.jpg); height: 600px; position: fixed;}
+    	.item{ width:9.0rem; height: 70px; margin-left: 0.5rem;background: #eaf9fa; border-radius:8px; margin-top: 10px;}
+    	.item_img{ width:1.6rem; height: 70px; float: left;}
+    	.item_img img{ height: 46px; max-width:1.4rem; margin-top: 12px; margin-left: 6px;}
+    	.delete{width:30px; height: 70px; float: left;}
+    	.delete img{ height: 30px; width:30px; margin-top: 18px; margin-left: 2px;}
+    	.item_title{ width:2.4rem;height: 70px; line-height: 35px;float: left;}
+    	.item_title1{height: 70px; width:40px; margin-left:10px; margin-right:10px; line-height: 35px;float: left;}
+    	.title1{ font-size: 16px; color: #000; font-weight:bolder;text-overflow:ellipsis;}
+    	.title2{ font-size: 12px; color: #86898a;text-overflow:ellipsis;}
+    	.data{ font-size:14px; line-height: 70px;}
+    	#footer{ width:10.0rem; height: 60px; background: #dff3f8;position:absolute; bottom: 0px; position:fixed;}
+    	#left,#right{width:5.0rem; height: 60px; text-align: center; line-height: 30px; color: #9ca1a1; position:relative; float: left;}
+    	#left img,#right img{ width:24px; position: absolute;top:6px; left:2.15rem;}
+    	#right{color:#2c7cf6;}
+    	#wrap{width:10.0rem; height: 800px; background: #000; opacity:0.5; z-index: 1; position:absolute;left: 0;top: 0; display:none;}
+   		#se{ width:9.0rem; margin-left: 0.5rem; z-index: 2;position:absolute;left: 0;top: 200px; display:none;}
+   		#se img{width:9.0rem;}
+   		.emo{height: 70px; line-height: 70px; float: left; margin-right: 10px; margin-top:10px;}
+   		.emo img{ height: 30px; width:30px;}
+    </style>
+</head>
+<body>
+	<div id="header">
+		<div id="edit">Edit</div>
+		<div id="note">Note</div>
+		<div id="add">+</div>
+	</div>
+	<div id="content">
+		
+	</div>
+	<div id="footer">
+		<div id="left">
+			<img src="../image/main_r.gif"/><br />
+			<span>Main</span>
+		</div>
+		<div id="right">
+			<img src="../image/history_r.gif"/><br />
+			<span>History</span>
+		</div>
+	</div>
+	
+	<div id="wrap"></div>
+	<div id="se">
+		<img id="seImg" src="../image/fj1.jpg"/><br />
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript">
+	
+	apiready = function(){
+		var right = document.getElementById("right");
+		var left = document.getElementById("left");
+		var edit = document.getElementById("edit");
+		var content = document.getElementById("content");
+		var add = document.getElementById("add");
+		var wrap = document.getElementById("wrap");
+		var se = document.getElementById("se");
+		var seImg = document.getElementById("seImg");
+		var item = "";
+		var itemDelete = "";
+		var flag = true;
+		var cc ="";
+		//localStorage.setItem('key',JSON.stringify(itemData));
+		var read=JSON.parse(localStorage.getItem('key'));
+    		for(var i=0;i<read.length;i++){
+    			//alert(read[i].img);
+				//cc+='<div class="item"><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="data">'+read[i].data+'</div></div>';
+		   		cc+='<div class="item"><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].data+'</span><br /><span class="title2">'+read[i].day+'</span></div><div class="item_title1"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="emo"><img class="fjImg" src="'+fj1[parseInt(read[i].emIndex)]+'"/></div><div class="emo"><img class="fjImg" src="'+fj2[parseInt(read[i].weIndex)]+'"/></div></div>';
+		   }
+		 //alert(cc);
+		content.innerHTML = cc;
+		var item_title = document.getElementsByClassName("item_title");
+		var fjImg = document.getElementsByClassName("fjImg");
+		
+		for(var i=0;i<item_title.length;i++)
+		{
+			item_title[i].index = i;
+			fjImg[i].index = i;
+		}
+		for(var i=0;i<fjImg.length;i++)
+		{
+			fjImg[i].onclick = function(){
+				wrap.style.display ="block";
+				se.style.display = "block";
+				var read=JSON.parse(localStorage.getItem('key'));
+				//alert(fj[parseInt(read[this.index].img)]);
+				seImg.src=fj[parseInt(read[this.index].img)];
+			};
+		}
+		se.onclick = function(){
+			wrap.style.display ="none";
+			se.style.display = "none";
+		};
+		for(var i=0;i<item_title.length;i++)
+		{
+			item_title[i].onclick = function(){
+				//alert(this.index);
+				api.openFrame({
+	        		name: 'old',
+	        		url: './old.html',
+	        		rect: {
+		        		x:0,
+		        		y:0,
+	        		},
+	        		pageParam: {
+        			name: this.index
+    				},
+	        		vScrollBarEnabled:false,
+	        		hScrollBarEnabled:false,
+	        		reload:true,
+	        		allowEdit:true
+        		});
+			};
+		}
+		
+			edit.onclick = function(){
+			if(flag==true){
+				var cc ="";
+			var read=JSON.parse(localStorage.getItem('key'));
+    		for(var i=0;i<read.length;i++){
+    			//alert(read[i].img);
+				//cc+='<div class="item"><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="data">'+read[i].data+'</div></div>';
+		   		cc+='<div class="item"><div class="delete"><img src="../image/delete.gif"/></div><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].data+'</span><br /><span class="title2">'+read[i].day+'</span></div><div class="item_title1"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="emo"><img class="fjImg" src="'+fj1[parseInt(read[i].emIndex)]+'"/></div><div class="emo"><img class="fjImg" src="'+fj2[parseInt(read[i].weIndex)]+'"/></div></div>';
+		   }
+		 	//alert(cc);
+			content.innerHTML = cc;
+			
+			var del = document.getElementsByClassName("delete");
+			var item = document.getElementsByClassName("item");
+			for(var i=0;i<del.length;i++)
+			{
+				del[i].index = i;
+			}
+			for(var j=0;j<del.length;j++)
+			{
+				
+				del[j].onclick = function(){
+					var read=JSON.parse(localStorage.getItem('key'));
+					read.splice(this.index,1);
+					localStorage.setItem('key',JSON.stringify(read));
+					
+					if(del.length==1)
+					{
+						content.removeChild(item[0]);
+					}else
+					{
+						content.removeChild(item[this.index]);
+					}
+					for(var i=0;i<del.length;i++)
+					{
+						del[i].index = i;
+					}
+				};
+			}
+			flag = !flag;
+			}else{
+				flag = !flag;
+				var cc ="";
+			var read=JSON.parse(localStorage.getItem('key'));
+    		for(var i=0;i<read.length;i++){
+    			//alert(read[i].img);
+				//cc+='<div class="item"><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="data">'+read[i].data+'</div></div>';
+		   		cc+='<div class="item"><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].data+'</span><br /><span class="title2">'+read[i].day+'</span></div><div class="item_title1"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="emo"><img class="fjImg" src="'+fj1[parseInt(read[i].emIndex)]+'"/></div><div class="emo"><img class="fjImg" src="'+fj2[parseInt(read[i].weIndex)]+'"/></div></div>';
+		   }
+		 //alert(cc);
+		content.innerHTML = cc;
+			}
+			
+		};
+		  left.onclick = function(){
+		  	api.openFrame({
+	        		name: 'content',
+	        		url: './content.html',
+	        		rect: {
+		        		x:0,
+		        		y:0,
+	        		},
+	        		vScrollBarEnabled:false,
+	        		hScrollBarEnabled:false,
+	        		reload:true,
+	        		allowEdit:true
+        		});
+		  };
+		add.onclick = function(){
+			api.openFrame({
+	        		name: 'add',
+	        		url: './add.html',
+	        		rect: {
+		        		x:0,
+		        		y:0,
+	        		},
+	        		vScrollBarEnabled:false,
+	        		hScrollBarEnabled:false,
+	        		reload:true,
+	        		allowEdit:true
+        		});
+		};
+		api.addEventListener({
+    	name: 'myEvent'
+		}, function(ret, err) {
+			//alert(itemData.length);
+			var cc ="";
+			var read=JSON.parse(localStorage.getItem('key'));
+    		for(var i=0;i<read.length;i++){
+    			//alert(read[i].img);
+				//cc+='<div class="item"><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="data">'+read[i].data+'</div></div>';
+		   		cc+='<div class="item"><div class="item_img"><img class="fjImg" src="'+fj[parseInt(read[i].img)]+'"/></div><div class="item_title"><span class="title1">'+read[i].data+'</span><br /><span class="title2">'+read[i].day+'</span></div><div class="item_title1"><span class="title1">'+read[i].title+'</span><br /><span class="title2">'+read[i].title+'</span></div><div class="emo"><img class="fjImg" src="'+fj1[parseInt(read[i].emIndex)]+'"/></div><div class="emo"><img class="fjImg" src="'+fj2[parseInt(read[i].weIndex)]+'"/></div></div>';
+		   }
+		   //alert(cc);
+		   content.innerHTML = cc;
+		   for(var i=0;i<item_title.length;i++)
+			{
+				item_title[i].index = i;
+			}
+		   for(var i=0;i<item_title.length;i++)
+			{
+			item_title[i].onclick = function(){
+			
+				
+				//alert(this.index);
+				api.openFrame({
+	        		name: 'old',
+	        		url: './old.html',
+	        		rect: {
+		        		x:0,
+		        		y:0,
+	        		},
+	        		pageParam: {
+        			name: this.index
+    				},
+	        		vScrollBarEnabled:false,
+	        		hScrollBarEnabled:false,
+	        		reload:true,
+	        		allowEdit:true
+        		});
+			};
+		}
+		});
+	};
+</script>
+</html>
